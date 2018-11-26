@@ -3,10 +3,16 @@ pipeline {
     agent any
 
     stages {
+        stage('Initilize'){
+            stages{
+                sh '''
+		    echo "stating build"         
+       '''
+         }
+        }
         stage('Build') {
             steps {
-                sh 'mvn install'
-		archiveArtifacts artifacts '**/target/*.jar', 
+                sh 'mvn install' 
             }
 
         }
