@@ -14,7 +14,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh '${MAVEN_HOME}/bin/mvn install' 
+                sh '${MAVEN_HOME} install' 
             }
             post {
                 success {
