@@ -1,29 +1,29 @@
 #!/usr/bin/env groovy
+
 pipeline {
     agent any
-
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
     stages {
-        stage('Initilize'){
-            stages{
+        stage ('Initialize') {
+            steps {
                 sh '''
-		    echo "stating build"         
-       '''
-         }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn install' 
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
             }
+        }
 
-        }
-        stage('Test') {
+        stage ('Build') {
             steps {
-                echo 'Testing..'
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
             }
         }
     }
