@@ -5,8 +5,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'mvn install..'
+                sh 'mvn install'
+		archiveArtifacts artifacts '**/target/*.jar', 
             }
+
         }
         stage('Test') {
             steps {
