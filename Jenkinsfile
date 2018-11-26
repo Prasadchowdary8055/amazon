@@ -14,7 +14,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh '${MAVEN_HOME} install' 
+                sh '/Users/prasad/Downloads/apache-maven-3.6.0/bin/mvn install' 
             }
             post {
                 success {
